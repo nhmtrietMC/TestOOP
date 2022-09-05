@@ -12,6 +12,7 @@ namespace ConsoleApp1
         private Bill[] _listBill;
         public void Input()
         {
+            Console.Clear();
             do
             {
                 Console.ResetColor();
@@ -96,7 +97,7 @@ namespace ConsoleApp1
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Cam on ban da su dung chuong trinh !");
-                    Console.WriteLine(@"Neu ban co tai hoa don xuong thi theo duong dan nay : C:\Users\DELL\Desktop");
+                    Console.WriteLine(@"Neu ban co tai hoa don xuong thi vao desktop file ten la : danh_sach_hoa_don.txt");
                     check = false;
                     Console.ResetColor();
                 }

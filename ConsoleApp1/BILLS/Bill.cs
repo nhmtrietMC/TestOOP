@@ -21,7 +21,7 @@ namespace ConsoleApp1
             do
             {
                 Console.ResetColor();
-                Console.Write("- Nhap ma hoa don : ");
+                Console.Write("- Nhap ma hoa don (Vi du nhap theo dang HD001) : ");
                 _id = Console.ReadLine();
             } while (!checkID(_id));
 
@@ -60,13 +60,15 @@ namespace ConsoleApp1
 
         private bool checkDateTime(string dateCheck)
         {
-            DateTime tempDate;
-            if (DateTime.TryParseExact(dateCheck, "dd/MM/yyyy", null, DateTimeStyles.None, out tempDate))
+            if (dateCheck == "") return false;
+            DateTime from_dateValue;
+            var formats = new[] { "dd/MM/yyyy", "dd/M/yyyy", "d/M/yyyy", "d/MM/yyyy", "dd/MM/yy", "d/M/yy", "dd/M/yy", "d/MM/yy" };
+            if (DateTime.TryParseExact(dateCheck, formats, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out from_dateValue))
                 return true;
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("=>  Ngay lap hoa don khong hop le !!!");
+                Console.WriteLine("=>  Luu y nhap ngay khong hop le !!!");
                 return false;
             }
         }
@@ -74,7 +76,7 @@ namespace ConsoleApp1
         private bool checkID(string idCheck)
         {
             var regexItem = new Regex("^[a-zA-Z0-9 ]*$");
-            if (regexItem.IsMatch(idCheck))
+            if (regexItem.IsMatch(idCheck) && idCheck != "")
                 return true;
             else
             {

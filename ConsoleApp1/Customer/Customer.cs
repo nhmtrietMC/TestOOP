@@ -19,7 +19,7 @@ namespace ConsoleApp1
             do
             {
                 Console.ResetColor();
-                Console.Write($"\t{c}  Nhap ma khach hang: ");
+                Console.Write($"\t{c}  Nhap ma khach hang (Vi du nhap KH001): ");
                 _id = Console.ReadLine();
             }
             while (!checkID(_id));
@@ -52,7 +52,7 @@ namespace ConsoleApp1
         private bool checkID(string idCheck)
         {
             var regexItem = new Regex("^[a-zA-Z0-9 ]*$");
-            if (regexItem.IsMatch(idCheck))
+            if (regexItem.IsMatch(idCheck) && idCheck != "")
                 return true;
             else
             {
@@ -65,7 +65,7 @@ namespace ConsoleApp1
         private bool checkName(string nameCheck)
         {
             var regexItem = new Regex("^[a-zA-Z0-9 ]*$");
-            if (regexItem.IsMatch(nameCheck))
+            if (regexItem.IsMatch(nameCheck) && nameCheck != "")
                 return true;
             else
             {
@@ -78,7 +78,7 @@ namespace ConsoleApp1
         private bool checkAddress(string addressCheck)
         {
             var regexItem = new Regex("^[a-zA-Z0-9 ]*$");
-            if (regexItem.IsMatch(addressCheck))
+            if (regexItem.IsMatch(addressCheck) && addressCheck != "")
                 return true;
             else
             {
