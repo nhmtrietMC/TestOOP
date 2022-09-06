@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ConsoleApp1;
+using System.Text.RegularExpressions;
 
 namespace ConsoleApp1
 {
@@ -15,6 +16,13 @@ namespace ConsoleApp1
         public override void Input()
         {
             fanType = 2;
+            do
+            {
+                Console.ResetColor();
+                Console.Write($"\t{c}  Nhap ma san pham (theo format QN_(ma so) vi du QN_001) : ");
+                id = Console.ReadLine();
+            }
+            while (!checkID(id));
             base.Input();
             do
             {
@@ -67,6 +75,23 @@ namespace ConsoleApp1
             }
             else
                 return true;
+        }
+
+        private bool checkID(string idCheck)
+        {
+
+            var regexItem = new Regex("^[a-zA-Z0-9_]*$");
+            bool check;
+            check = (idCheck.IndexOf("QN_") == 0) ? true : false;
+            if (regexItem.IsMatch(idCheck) && idCheck != "" && check)
+                return true;
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"\t{c}=>  Luu y nhap ma so chi bao gom ky tu so va chu !!!");
+                Console.WriteLine($"\t{c}=>  Cu phap ma so co dang (QN_(ma so) vi du QN_001)");
+                return false;
+            }
         }
     }
 }

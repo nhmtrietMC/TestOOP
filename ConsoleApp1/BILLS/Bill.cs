@@ -21,7 +21,7 @@ namespace ConsoleApp1
             do
             {
                 Console.ResetColor();
-                Console.Write("- Nhap ma hoa don (Vi du nhap theo dang HD001) : ");
+                Console.Write("- Nhap ma hoa don (Vi du nhap theo dang HD_(ma so) vi du HD_001) : ");
                 _id = Console.ReadLine();
             } while (!checkID(_id));
 
@@ -75,13 +75,16 @@ namespace ConsoleApp1
 
         private bool checkID(string idCheck)
         {
-            var regexItem = new Regex("^[a-zA-Z0-9 ]*$");
-            if (regexItem.IsMatch(idCheck) && idCheck != "")
+            var regexItem = new Regex("^[a-zA-Z0-9_]*$");
+            bool check;
+            check = (idCheck.IndexOf("HD_") == 0 ? true : false);
+            if (regexItem.IsMatch(idCheck) && idCheck != "" && check)
                 return true;
             else
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("=>  Luu y nhap ma so chi bao gom ky tu so va chu !!!");
+                Console.WriteLine("=>  Luu y nhap ma so co dang HD_(ma so) vi du HD_001 !!!");
                 return false;
             }
         }

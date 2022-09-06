@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Threading;
 
 namespace ConsoleApp1
 {
@@ -31,6 +32,7 @@ namespace ConsoleApp1
            for(int i = 0; i < _numBill; i++)
             {
                 _listBill[i] = new Bill();
+                Console.Clear();
                 Console.WriteLine($"- Nhap thong tin hoa don {i + 1}:");
                 _listBill[i].Input();
             }
@@ -38,7 +40,6 @@ namespace ConsoleApp1
 
         public void Output()
         {
-            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\danh_sach_hoa_don.txt", "");
             Console.Clear();
             bool check = true;
             int index = 0;
@@ -49,7 +50,7 @@ namespace ConsoleApp1
             {
                 Console.ResetColor();
                 Console.WriteLine();
-                Console.WriteLine("Dung 2 phim < va > de di chuyen hoa don tuong ung trai phai, phim enter de tai hoa don xuong, cac phim con lai se dung chuong trinh");
+                Console.WriteLine("Dung 2 phim < va > de di chuyen hoa don tuong ung trai phai, cac phim con lai se dung chuong trinh");
                 var sig = Console.ReadKey();
                 if (sig.Key == ConsoleKey.LeftArrow)
                 {
@@ -83,7 +84,7 @@ namespace ConsoleApp1
                     }
                 }
                 else
-                if(sig.Key == ConsoleKey.Enter)
+                /*if(sig.Key == ConsoleKey.Enter)
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("\nDang tai file xuong !!!");
@@ -92,18 +93,36 @@ namespace ConsoleApp1
                     sw.Close();
                     _listBill[index].OutputText();
                 }    
-                else
+                else*/
                 {
                     Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    /*Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("Cam on ban da su dung chuong trinh !");
-                    Console.WriteLine(@"Neu ban co tai hoa don xuong thi vao desktop file ten la : danh_sach_hoa_don.txt");
+                    Console.WriteLine(@"Neu ban co tai hoa don xuong thi vao desktop file ten la : danh_sach_hoa_don.txt");*/
                     check = false;
-                    Console.ResetColor();
+                    /*Console.ResetColor();*/
                 }
             }
             while (check);
 
+        }
+
+        public void Save()
+        {
+            File.WriteAllText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\danh_sach_hoa_don.txt", "");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("\n\t\t\t Dang tai file xuong ");
+            for(int i = 0; i < 3; i++)
+            {
+                Console.Write("!");
+                Thread.Sleep(1000);
+            }
+            Console.WriteLine();
+            Console.ResetColor();
+            StreamWriter sw = File.AppendText(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\danh_sach_hoa_don.txt");
+            sw.Close();
+            for (int i = 0; i < _numBill; i++)
+                _listBill[i].OutputText();
         }
         private bool checkNumBill(int numBillCheck)
         {

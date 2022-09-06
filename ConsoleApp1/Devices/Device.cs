@@ -27,13 +27,13 @@ namespace ConsoleApp1
 
         public virtual void Input()
         {
-            do
+            /*do
             {
                 Console.ResetColor();
                 Console.Write($"\t{c}  Nhap ma san pham (Vi du nhap SP001) : ");
                 id = Console.ReadLine();
             }
-            while (!checkID(id));
+            while (!checkID(id));*/
 
             do
             {
